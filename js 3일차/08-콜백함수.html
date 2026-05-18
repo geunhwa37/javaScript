@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    
+    // 콜백함수란? : 함수의 인자로 들어가는 함수
+
+   
+    // 1
+    // forEach 함수 안에 인자로 function(num) {} ---> 콜백함수
+    const numbers1 = [1, 2, 3]
+    numbers1.forEach(function(num) {
+      console.log(num ** 2)
+    })
+
+
+    // 1번 방식을 화살표 함수로(1.function키워드삭제, 2.인자1개면 소괄호삭제)
+    // 단점 : 콜백함수를 재사용 x
+    numbers1.forEach(num => console.log(num ** 2))
+
+
+    // 2 함수 표현식
+    const numbers2 = [4, 5, 6]
+    const callBackFunctions1 = function (num) {
+      console.log(num ** 2)
+    }
+    // 함수호출
+    numbers2.forEach(callBackFunctions1) // 여기서 콜백함수는 callBackFunctions1
+
+
+    // 2번 방식을 화살표 함수로
+    // 2번 방식은 언제 쓸까?
+    const callBackFunctions2 = num => console.log(num ** 2)
+    numbers2.forEach(callBackFunctions2) // callBackFunctions2 : 콜백함수
+
+    // 장점 : 재사용 가능
+
+    // 결론 : 함수의 인자로 들어가는 함수가 콜백함수고, 이를 화살표 함수로 쓴다.
+
+
+  </script>
+</body>
+
+</html>
