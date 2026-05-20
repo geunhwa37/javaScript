@@ -1,0 +1,66 @@
+<!-- 고양이 이미지를 가져와서 보여주는 웹 페이지 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+
+  <button>냥냥펀치</button>
+
+
+  <!-- axios CDN -->
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+     
+    const CAT_URL = 'https://api.thecatapi.com/v1/images/search'
+
+    // 이벤트 처리
+    // 1. querySelctor
+    const btn = document.querySelector('button')
+
+    
+
+    // 2. 콜백 함수
+    const getCats = function () {
+       
+      axios({
+        method: 'get',
+        url: CAT_URL
+      })
+        // 첫 번째 then : 성공했을때 API응답에서 URL을 추출
+        .then((response) => {
+          const imgUrl = response.data[0].url
+          return imgUrl
+        })
+        // 두 번째 then : 이미 URL 추출 후, 웹페이지에 img 태그에 추가
+        .then((imgData) => {
+          // img 요소 생성
+          const imgElem = document.createElement('img')
+          // 메서드(속성조작 메서드) : setAttribute
+          imgElem.setAttribute('src', imgData)
+          // body요소의 자식요소로 추가
+          document.body.appendChild(imgElem)
+
+        })
+        // 실패했을때
+        .catch((error) => {
+          console.log(error)
+          console.log('실패')
+        })
+
+      console.log('야옹야옹')
+    }
+
+    // 3. 이벤트 리스너
+    btn.addEventListener('click', getCats)
+
+    // promise의 주요 장점 2가지
+
+   </script>
+</body>
+</html>

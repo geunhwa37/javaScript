@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+
+   <!-- 고양이 이미지를 가져오는 버튼 -->
+   <button>냥냥펀치</button>
+
+   <!-- Axios 라이브러리 추가 -->
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <script>
+      // 고양이 API의 주소를 변수에 저장
+      const CAT_URL = 'https://api.thecatapi.com/v1/images/search'
+       
+      // 1. querySelector
+      const btn = document.querySelector('button')
+
+      // 2. 콜백함수
+      // Promise -> .then / .catch
+      // async | await -> try catch
+      const getCats = async function () {
+         try{
+            // 서버로 요청보내고 서버로부터 응답 받을때 await
+            const response = await axios.get(CAT_URL)
+            // 이미지 url 추출
+            const imgUrl = response.data[0].url // .....jpg
+            // img 태그 생성, 속성조작(setAttribut), body태그 자식으로 img태그 추가(appendChild)
+            const imgElem = document.createElement('img')
+            imgElem.setAttribute('src', imgUrl)
+            document.body.appendChild(imgElem)
+         }
+         catch (error) {
+            console.log(error)
+         }
+         console.log('야옹야옹')
+      }
+
+      //3. 이벤트 리스너
+      btn.addEventListener('click', getCats)
+
+
+      // async/await 쓰는 이유? (Promise랑 비교했을 때)
+      // 소스코드는 동기 코드처럼 작성하는데 비동기로 동작
+      // 결론 : 가독성의 차이
+
+   </script>
+</body>
+</html>
